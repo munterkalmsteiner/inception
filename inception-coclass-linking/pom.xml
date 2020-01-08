@@ -11,7 +11,7 @@
   <name>INCEpTION - CoClass Linking</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <dkpro.core.version>1.10.0</dkpro.core.version> <!-- We use 1.10.0 since 11 is not published yet on mvn central -->
+    <dkpro.core.version>2.0.0</dkpro.core.version>
   </properties>
   <dependencies>
   	<dependency>
@@ -29,6 +29,21 @@
   		</artifactId>
   		<version>${dkpro.core.version}</version>
   	</dependency>
+  	<dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-sv-maxent</artifactId>
+        <version>20120616.1</version>
+    </dependency>
+  	<dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</artifactId>
+        <version>20120616.1</version>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-sv-maxent</artifactId>
+        <version>20120616.1</version>
+    </dependency>
   	<dependency>
   		<groupId>org.apache.commons</groupId>
   		<artifactId>commons-csv</artifactId>

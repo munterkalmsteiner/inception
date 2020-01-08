@@ -30,11 +30,11 @@ import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.dkpro.core.opennlp.OpenNlpPosTagger;
+import org.dkpro.core.opennlp.OpenNlpSegmenter;
+import org.dkpro.core.snowball.SnowballStemmer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 
 public class NLP
