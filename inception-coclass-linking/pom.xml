@@ -11,7 +11,6 @@
   <name>INCEpTION - CoClass Linking</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <dkpro.core.version>2.0.0</dkpro.core.version>
   </properties>
   <dependencies>
   	<dependency>
@@ -23,11 +22,10 @@
   		<artifactId>inception-recommendation-api</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<groupId>org.dkpro.core</groupId>
   		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.opennlp-asl
+  			dkpro-core-opennlp-asl
   		</artifactId>
-  		<version>${dkpro.core.version}</version>
   	</dependency>
   	<dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -49,18 +47,16 @@
   		<artifactId>commons-csv</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<groupId>org.dkpro.core</groupId>
   		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.io.text-asl
+  			dkpro-core-io-text-asl
   		</artifactId>
-  		<version>${dkpro.core.version}</version>
   	</dependency>
   	<dependency>
-  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<groupId>org.dkpro.core</groupId>
   		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.snowball-asl
+  			dkpro-core-snowball-asl
   		</artifactId>
-  		<version>${dkpro.core.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.inception.app</groupId>
