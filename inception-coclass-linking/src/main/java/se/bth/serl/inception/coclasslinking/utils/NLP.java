@@ -38,6 +38,7 @@ import org.dkpro.core.snowball.SnowballStemmer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
+import se.bth.serl.inception.coclasslinking.recommender.Term;
 
 public class NLP
 {
@@ -64,8 +65,9 @@ public class NLP
         return aBaseEngine;
     }
     
-    public static Optional<Token> stem(String term) throws RecommendationException {
+    public static Optional<Term> stem(String term) throws RecommendationException {
         Optional<Token> token = Optional.empty();
+        Optional<Term> aTerm = Optional.empty();
         
         initStemEngine(term);
         
@@ -78,7 +80,10 @@ public class NLP
             Collection<Token> tokens = JCasUtil.select(aCas.getJCas(), Token.class);
             
             if (tokens.size() > 0) {
-                token = tokens.stream().findFirst();
+                token = tokens.stream().findFirst(); 
+                if(token.isPresent()) {
+                    aTerm = Optional.of(new Term(token.get()));
+                }
             }
         } catch (UIMAException e) {
             throw new RecommendationException("Could not run stemmer.", e);
@@ -87,7 +92,7 @@ public class NLP
             aCasPool.releaseCas(aCas);
         }
         
-        return token;
+        return aTerm;
     }
     
     private static void initStemEngine(String term) throws RecommendationException {

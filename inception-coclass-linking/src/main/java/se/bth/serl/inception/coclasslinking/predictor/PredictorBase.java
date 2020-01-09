@@ -79,9 +79,9 @@ public abstract class PredictorBase
             if (components.isPresent()) {
                 components.get().forEach(c -> {
                     try {
-                        Optional<Token> token = NLP.stem(c);
-                        if (token.isPresent()) {
-                            terms.add(new Term(token.get()));
+                        Optional<Term> term = NLP.stem(c);
+                        if (term.isPresent()) {
+                            terms.add(term.get());
                         }
                     } catch (RecommendationException e) {
                         log.error(e.getMessage());

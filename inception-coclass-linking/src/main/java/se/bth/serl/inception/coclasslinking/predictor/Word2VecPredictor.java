@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 
 import org.deeplearning4j.models.word2vec.Word2Vec;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import se.bth.serl.inception.coclasslinking.recommender.CCObject;
@@ -103,9 +102,9 @@ public class Word2VecPredictor
 
         for (String similarWord : similarWords) {
             try {
-                Optional<Token> token = NLP.stem(similarWord.toLowerCase());
-                if (token.isPresent()) {
-                    String stem = token.get().getStemValue();
+                Optional<Term> term = NLP.stem(similarWord.toLowerCase());
+                if (term.isPresent()) {
+                    String stem = term.get().getStem();
                     List<CCObject> ccObjects = coClassModel.get(stem);
                     if (ccObjects != null) {
                         hits.put(similarWord, ccObjects);

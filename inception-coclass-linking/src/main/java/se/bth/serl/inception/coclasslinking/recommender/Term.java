@@ -30,8 +30,8 @@ public class Term
 
     public Term(Token aToken)
     {
-        term = aToken.getText();
-        stem = aToken.getStemValue();
+        term = new String(aToken.getText());
+        stem = new String(aToken.getStemValue());
         posValue = aToken.getPosValue();
         begin = aToken.getBegin();
         end = aToken.getEnd();
