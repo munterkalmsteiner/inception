@@ -24,12 +24,14 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.apache.uima.UIMAException;
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.CasPool;
 import org.dkpro.core.opennlp.OpenNlpPosTagger;
 import org.dkpro.core.opennlp.OpenNlpSegmenter;
 import org.dkpro.core.snowball.SnowballStemmer;
@@ -41,7 +43,7 @@ public class NLP
 {
     private static AnalysisEngine aBaseEngine = null;
     private static AnalysisEngine aStemEngine = null;
-    private static CAS aCas = null;
+    private static CasPool aCasPool = null;
 
     public static AnalysisEngine baseAnalysisEngine() throws RecommendationException
     {
@@ -51,7 +53,8 @@ public class NLP
                 builder.add(createEngineDescription(OpenNlpSegmenter.class));
                 builder.add(createEngineDescription(OpenNlpPosTagger.class));
                 builder.add(createEngineDescription(SnowballStemmer.class));
-                aBaseEngine = builder.createAggregate();
+                aBaseEngine = UIMAFramework.produceAnalysisEngine(builder.createAggregateDescription(), 10, 0);
+                
             }
             catch (ResourceInitializationException e) {
                 throw new RecommendationException("Could not create base analysis engine.", e);
@@ -66,7 +69,10 @@ public class NLP
         
         initStemEngine(term);
         
+        CAS aCas = aCasPool.getCas(0);
         try {   
+            aCas.setDocumentLanguage("sv");
+            aCas.setDocumentText(term);
             SimplePipeline.runPipeline(aCas, aStemEngine);
             
             Collection<Token> tokens = JCasUtil.select(aCas.getJCas(), Token.class);
@@ -76,6 +82,9 @@ public class NLP
             }
         } catch (UIMAException e) {
             throw new RecommendationException("Could not run stemmer.", e);
+        }
+        finally {
+            aCasPool.releaseCas(aCas);
         }
         
         return token;
@@ -87,23 +96,11 @@ public class NLP
                 AggregateBuilder builder = new AggregateBuilder();
                 builder.add(createEngineDescription(OpenNlpSegmenter.class));
                 builder.add(createEngineDescription(SnowballStemmer.class));
-                aStemEngine = builder.createAggregate();
+                aStemEngine = UIMAFramework.produceAnalysisEngine(builder.createAggregateDescription(), 10, 0);
+                aCasPool = new CasPool(10, aStemEngine);
             } catch (ResourceInitializationException e) {
                 throw new RecommendationException("Could not create stem analysis engine.", e);
             }
-        }
-        
-        if (aCas == null) {
-            try {
-                aCas = aStemEngine.newCAS();
-            } catch (UIMAException e) {
-                throw new RecommendationException("Could not create JCas.", e);
-            }
-        } else {
-            aCas.reset();
-        }
-        
-        aCas.setDocumentLanguage("sv");
-        aCas.setDocumentText(term);
+        }        
     }
 }
