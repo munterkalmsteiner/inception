@@ -97,7 +97,6 @@
     <!-- Knowledge base -->
     <module>inception-kb</module>
     <module>inception-ui-kb</module>
-    <module>inception-concept-linking</module>
     <!-- Editor extensions -->
     <module>inception-html-editor</module>
     <module>inception-pdf-editor</module>
