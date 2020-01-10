@@ -108,7 +108,6 @@ public class CCObject
     public void addSynonym(String synonym)
     {
         this.synonyms.add(synonym);
-        this.nouns.add(synonym);
     }
 
     public void addNoun(String noun)
@@ -119,11 +118,6 @@ public class CCObject
     public Set<String> getNouns()
     {
         return nouns;
-    }
-
-    public void printNouns()
-    {
-        System.out.println(getText() + ": " + nouns.stream().collect(Collectors.joining(",")));
     }
 
     public void addW2VSimilarWord(String word)
@@ -143,10 +137,13 @@ public class CCObject
 
         String result = "";
         if (nameString != null) {
-            result += nameString + ".";
+            result += nameString + ".\n";
         }
         if (definitionString != null) {
-            result += " " + definitionString + ".";
+            result += definitionString + ".\n";
+        }
+        if (!synonyms.isEmpty()) {
+            result += synonyms.stream().collect(Collectors.joining(", "));
         }
 
         return result;
