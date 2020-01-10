@@ -41,21 +41,6 @@ public class Word2VecPredictor
     private Word2Vec w2vModel;
     private final int numSimilarWords = 10;
 
-    /*
-     * Using pre-trained model: https://github.com/Kyubyong/wordvectors In order to use it in D4J, I
-     * had to load it in python first: 
-     * >>> from gensim.models import Word2Vec 
-     * >>> model = Word2Vec.load('/home/mun/nosync/word2vec/kyubyong/sv.bin') 
-     * and then save in a new file
-     * model.wv.save_word2vec_format("path/to/w2v_model.bin", binary=True)
-     * 
-     * https://stackoverflow.com/a/51293410/2091625
-     * 
-     * There are a couple of other larger pre-trained models: http://vectors.nlpl.eu/repository/
-     * https://fasttext.cc/docs/en/crawl-vectors.html
-     * 
-     * We can also train our own model with the wikipedia and the spearfishing corpus.
-     */
     public Word2VecPredictor(Map<String, List<CCObject>> aCoClassModel, Word2Vec aW2vModel)
     {
         super(aCoClassModel);

@@ -84,7 +84,7 @@ public class CoClassLinker
 {
     public static final Key<Map<String, IriFrequency>> KEY_MODEL = new Key<>("ccMapping");
     private static final String LOOKUP_FILE = "coclass-lookup.bin";
-    private static final String W2V_FILE = "spearfishing_4.bin";
+    private static final String W2V_FILE = "word2vec.bin";
     private static Map<String, List<CCObject>> coClassModel = null;
     private static Word2Vec w2vModel = null;
     private final Logger log = LoggerFactory.getLogger(getClass());
