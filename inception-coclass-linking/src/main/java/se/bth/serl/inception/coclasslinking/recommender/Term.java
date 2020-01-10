@@ -30,6 +30,8 @@ public class Term
 
     public Term(Token aToken)
     {
+        // Copying the string values to make sure they continue to exist, even if the CAS, 
+        // and therefore the Token, is reset. 
         term = new String(aToken.getText());
         stem = new String(aToken.getStemValue());
         posValue = aToken.getPosValue();

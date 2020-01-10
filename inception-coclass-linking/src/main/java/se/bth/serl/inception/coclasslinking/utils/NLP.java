@@ -42,6 +42,8 @@ import se.bth.serl.inception.coclasslinking.recommender.Term;
 
 public class NLP
 {
+    private static final int AE_POOL_SIZE = 10;
+    private static final int CAS_POOL_SIZE = 10;
     private static AnalysisEngine aBaseEngine = null;
     private static AnalysisEngine aStemEngine = null;
     private static CasPool aCasPool = null;
@@ -54,8 +56,8 @@ public class NLP
                 builder.add(createEngineDescription(OpenNlpSegmenter.class));
                 builder.add(createEngineDescription(OpenNlpPosTagger.class));
                 builder.add(createEngineDescription(SnowballStemmer.class));
-                aBaseEngine = UIMAFramework.produceAnalysisEngine(builder.createAggregateDescription(), 10, 0);
-                
+                aBaseEngine = UIMAFramework.produceAnalysisEngine(
+                        builder.createAggregateDescription(), AE_POOL_SIZE, 0);
             }
             catch (ResourceInitializationException e) {
                 throw new RecommendationException("Could not create base analysis engine.", e);
@@ -66,7 +68,6 @@ public class NLP
     }
     
     public static Optional<Term> stem(String term) throws RecommendationException {
-        Optional<Token> token = Optional.empty();
         Optional<Term> aTerm = Optional.empty();
         
         initStemEngine(term);
@@ -80,7 +81,7 @@ public class NLP
             Collection<Token> tokens = JCasUtil.select(aCas.getJCas(), Token.class);
             
             if (tokens.size() > 0) {
-                token = tokens.stream().findFirst(); 
+                Optional<Token> token = tokens.stream().findFirst(); 
                 if(token.isPresent()) {
                     aTerm = Optional.of(new Term(token.get()));
                 }
@@ -101,8 +102,9 @@ public class NLP
                 AggregateBuilder builder = new AggregateBuilder();
                 builder.add(createEngineDescription(OpenNlpSegmenter.class));
                 builder.add(createEngineDescription(SnowballStemmer.class));
-                aStemEngine = UIMAFramework.produceAnalysisEngine(builder.createAggregateDescription(), 10, 0);
-                aCasPool = new CasPool(10, aStemEngine);
+                aStemEngine = UIMAFramework.produceAnalysisEngine(
+                        builder.createAggregateDescription(), AE_POOL_SIZE, 0);
+                aCasPool = new CasPool(CAS_POOL_SIZE, aStemEngine);
             } catch (ResourceInitializationException e) {
                 throw new RecommendationException("Could not create stem analysis engine.", e);
             }
