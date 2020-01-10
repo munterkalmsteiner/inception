@@ -18,6 +18,9 @@
 
 package se.bth.serl.inception.coclasslinking.recommender;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class Term
@@ -27,6 +30,8 @@ public class Term
     private String posValue;
     private int begin;
     private int end;
+    private static Set<String> nounBlackList = new HashSet<>(Set.of("."));
+    
 
     public Term(Token aToken)
     {
@@ -64,11 +69,9 @@ public class Term
      */
     public boolean isNoun()
     {
-        return posValue.equals("PN") || posValue.equals("MN") || posValue.equals("AN")
-                || posValue.equals("VN") || posValue.equals("NN");
+        return (posValue.equals("PN") || posValue.equals("MN") || posValue.equals("AN")
+                || posValue.equals("VN") || posValue.equals("NN")) && !nounBlackList.contains(term);
     }
-
-    
 
     @Override
     public String toString()
