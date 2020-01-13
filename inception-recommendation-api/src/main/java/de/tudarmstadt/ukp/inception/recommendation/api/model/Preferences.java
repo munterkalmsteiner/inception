@@ -24,7 +24,7 @@ public class Preferences
 {
     private static final long serialVersionUID = 979498856625982141L;
 
-    private int maxPredictions = 3;
+    private int maxPredictions = 5;
     private boolean showAllPredictions = false;
 
     public void setMaxPredictions(int aMaxPredictions)
