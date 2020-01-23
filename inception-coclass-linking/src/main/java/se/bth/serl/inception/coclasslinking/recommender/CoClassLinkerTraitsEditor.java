@@ -19,16 +19,16 @@ package se.bth.serl.inception.coclasslinking.recommender;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.AbstractTraitsEditor;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationEngineFactory;
 
-public class CoClassLinkerTraitsEditor extends Panel
+public class CoClassLinkerTraitsEditor extends AbstractTraitsEditor
 {
     private static final long serialVersionUID = 7333475005081889988L;
     private static final String MID_FORM = "form";
