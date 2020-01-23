@@ -63,6 +63,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wicketstuff.event.annotation.OnEvent;
 
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.BootstrapSelect;
 import de.tudarmstadt.ukp.clarin.webanno.api.AnnotationSchemaService;
 import de.tudarmstadt.ukp.clarin.webanno.api.CasProvider;
 import de.tudarmstadt.ukp.clarin.webanno.api.DocumentService;
@@ -83,7 +84,6 @@ import de.tudarmstadt.ukp.clarin.webanno.model.Project;
 import de.tudarmstadt.ukp.clarin.webanno.model.SourceDocument;
 import de.tudarmstadt.ukp.clarin.webanno.security.UserDao;
 import de.tudarmstadt.ukp.clarin.webanno.security.model.User;
-import de.tudarmstadt.ukp.clarin.webanno.support.bootstrap.select.BootstrapSelect;
 import de.tudarmstadt.ukp.clarin.webanno.support.lambda.LambdaAjaxButton;
 import de.tudarmstadt.ukp.clarin.webanno.support.lambda.LambdaAjaxLink;
 import de.tudarmstadt.ukp.clarin.webanno.support.lambda.LambdaModel;
@@ -241,6 +241,11 @@ public class SearchAnnotationSidebar
         annotationForm.setDefaultButton(annotateButton);
         annotationForm.add(visibleWhen(() -> !groupedSearchResults.getObject().isEmpty()));
 
+        
+        LambdaAjaxButton<Void> clearButton = new LambdaAjaxButton<>("clearButton",
+                this::actionClearResults);
+        annotationForm.add(clearButton);
+        
         mainContainer.add(annotationForm);
     }
 
@@ -306,6 +311,14 @@ public class SearchAnnotationSidebar
         groupedSearchResults.detach();
         aTarget.add(mainContainer);
         aTarget.addChildren(getPage(), IFeedback.class);
+    }
+    
+    private void actionClearResults(AjaxRequestTarget aTarget, Form<Void> aForm)
+    {
+        targetQuery.setObject("");
+        selectedResult = null;
+        groupedSearchResults.detach();
+        aTarget.add(mainContainer);
     }
     
     private Map<String, ResultsGroup> getSearchResultsGrouped()
