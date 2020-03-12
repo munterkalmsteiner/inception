@@ -20,7 +20,7 @@
   <parent>
     <groupId>de.tudarmstadt.ukp.inception.app</groupId>
     <artifactId>inception-app</artifactId>
-    <version>0.12.4</version>
+    <version>0.14.3</version>
   </parent>
   <artifactId>inception-kb</artifactId>
   <name>INCEpTION - Knowledge Base - Core</name>
@@ -136,6 +136,11 @@
       <groupId>org.cyberborean</groupId>
       <artifactId>rdfbeans</artifactId>
       <version>2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
     </dependency>
 
     <dependency>

@@ -59,6 +59,7 @@ import org.eclipse.rdf4j.sail.lucene.LuceneSail;
 import org.eclipse.rdf4j.sail.memory.MemoryStore;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.inception.kb.IriConstants;
@@ -455,7 +456,42 @@ public class SPARQLQueryBuilderTest
                 .containsExactlyInAnyOrder("http://example.org/#subproperty-1-1",
                         "http://example.org/#subproperty-1-1-1");
     }
+    
+    @Test
+    public void thatPropertyQueryListWorks_Wikidata()
+    {
+        assertIsReachable(wikidata);
+        
+        kb.setType(REMOTE);
+        kb.setFullTextSearchIri(FTS_WIKIDATA);
+        initWikidataMapping();
+        
+        List<KBHandle> results = asHandles(wikidata, SPARQLQueryBuilder
+                .forProperties(kb)
+                .limit(10));
+        
+        assertThat(results).extracting(KBHandle::getIdentifier).doesNotHaveDuplicates();
+        assertThat(results).hasSize(10);
+    }
 
+    @Test
+    public void thatPropertyQueryLabelStartingWith_Wikidata()
+    {
+        assertIsReachable(wikidata);
+        
+        kb.setType(REMOTE);
+        kb.setFullTextSearchIri(FTS_WIKIDATA);
+        initWikidataMapping();
+        
+        List<KBHandle> results = asHandles(wikidata, SPARQLQueryBuilder
+                .forProperties(kb)
+                .withLabelStartingWith("educated"));
+        
+        assertThat(results).extracting(KBHandle::getIdentifier).doesNotHaveDuplicates();
+        assertThat(results).isNotEmpty();
+        assertThat(results).extracting(KBHandle::getUiLabel)
+                .allMatch(label -> label.toLowerCase().startsWith("educated"));
+    }
     @Test
     public void thatPropertyQueryLimitedToChildrenDoesNotReturnOutOfScopeResults()
         throws Exception
@@ -814,6 +850,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> label.toLowerCase().contains("tower"));
     }
 
+    @Ignore
     @Test
     public void testWithLabelContainingAnyOf_Wikidata_FTS() throws Exception
     {
@@ -833,6 +870,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> label.toLowerCase().contains("tower"));
     }
 
+    @Ignore("#1522 - GND tests not running")
     @Test
     public void testWithLabelContainingAnyOf_Fuseki_FTS() throws Exception
     {
@@ -1153,6 +1191,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> label.startsWith("Barack Obam"));
     }
 
+    @Ignore
     @Test
     public void testWithLabelStartingWith_Wikidata_FTS() throws Exception
     {
@@ -1172,6 +1211,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> label.toLowerCase().startsWith("barack"));
     }
 
+    @Ignore("#1522 - GND tests not running")
     @Test
     public void testWithLabelStartingWith_Fuseki_FTS() throws Exception
     {
@@ -1210,6 +1250,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> "Labour".equals(label));
     }
 
+    @Ignore("#1522 - GND tests not running")
     @Test
     public void testWithLabelMatchingExactlyAnyOf_Fuseki_FTS_GND() throws Exception
     {
@@ -1251,6 +1292,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> "Labour".equals(label));
     }
 
+    @Ignore
     @Test
     public void testWithLabelMatchingExactlyAnyOf_Wikidata_FTS() throws Exception
     {
@@ -1270,6 +1312,7 @@ public class SPARQLQueryBuilderTest
                 .allMatch(label -> label.equalsIgnoreCase("Labour"));
     }
 
+    @Ignore
     @Test
     public void testWithLabelMatchingExactlyAnyOf_multiple_Wikidata_FTS() throws Exception
     {

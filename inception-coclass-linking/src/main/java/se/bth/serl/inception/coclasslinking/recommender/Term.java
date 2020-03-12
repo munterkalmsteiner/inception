@@ -20,6 +20,8 @@ package se.bth.serl.inception.coclasslinking.recommender;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -30,7 +32,8 @@ public class Term
     private String posValue;
     private int begin;
     private int end;
-    private static Set<String> nounBlackList = new HashSet<>(Set.of("."));
+    private static Set<String> nounBlackList = Stream.of(".")
+            .collect(Collectors.toCollection(HashSet::new));
     
 
     public Term(Token aToken)
