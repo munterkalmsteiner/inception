@@ -162,7 +162,6 @@ public class CoClassLinker
                     for (Map.Entry<String, Score> e : result.entrySet()) {
                         String iri = e.getKey();
                         Score score = e.getValue();
-
                         if (!score.ignore()) {
                             // checking that results are sorted in decreasing order
                             Double avgScore = score.getAverage();
@@ -242,13 +241,13 @@ public class CoClassLinker
                 }
             });
         }
-
+        
         return totalScore.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry
                         .comparingByValue((e1, e2) -> e1.totalScore.compareTo(e2.totalScore))))
+                .limit(maxRecommendations)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1,
                         LinkedHashMap::new));
-
     }
 
     private class Score
