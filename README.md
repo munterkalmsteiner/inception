@@ -27,10 +27,10 @@ To see an example of the suggestions produced by our recommender, follow these s
 
 1. Open the project `CoClassRecommender Pilot (with CCR)`: 
         
-    ![screenshot 1](inception-coclass-linking/src/main/resources/screenshots/screenshot_1.png)
+    ![s1](/inception-coclass-linking/src/main/resources/screenshots/screenshot_1.png?raw=true)
 2. Click on `Annotation`:
     
-    ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_2.png)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_2.png)
 3. Open the first document:
     
     ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_3.png)
