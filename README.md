@@ -27,24 +27,24 @@ To see an example of the suggestions produced by our recommender, follow these s
 
 1. Open the project `CoClassRecommender Pilot (with CCR)`: 
         
-    ![s1](/inception-coclass-linking/src/main/resources/screenshots/screenshot_1.png?raw=true)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_1.png)
 2. Click on `Annotation`:
     
     ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_2.png)
 3. Open the first document:
     
-    ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_3.png)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_3.png)
 4. Now wait until the recommender has done its initialization (this is currently not cached and can take up to 3 minutes). Check out the console output of INCEpTION to see when the initial recommendations are ready:
     
-    ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_4.png)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_4.png)
 5. Press `F5` to reload the page (unfortunately, new recommendations do not trigger an automatic page reload yet)
 6. You should see now the produced recommendations:
     
-    ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_5.png)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_5.png)
 7. Accept/reject a recommendation by clicking/double clicking on it.
 8. Open another requirement:
     
-    ![](https://raw.githubusercontent.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_6.png)
+    ![](https://raw.github.com/munterkalmsteiner/inception/CoClassRecommender/inception-coclass-linking/src/main/resources/screenshots/screenshot_6.png)
 
 
 ### Software requirements
