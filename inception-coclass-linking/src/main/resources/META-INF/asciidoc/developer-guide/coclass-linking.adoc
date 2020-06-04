@@ -1,0 +1,25 @@
+// Copyright 2020
+// Software Engineering Research Lab
+// Blekinge Institute of Technology
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_coclasslinking]]
+= CoClass Linking
+
+The coclass linking module was developed for evaluating the hypothesis whether domain experts are able to link requirements to concepts in a taxonomy. While we are currently working on generalizing the approach, the following steps need to be performed in order to extend the module to reuse it in its current form:
+
+1. Adapt `CoClassLinker.getCoClassLookupTable()`. This method parses the information form the knowledge base into a noun lookup table. The table is stored on disk as this takes considerable time and should not be repeated every time the recommender is launched. Currently, the method assumes that the knowledge base contains the attributes `dimension`, `code`, and `synonym` which are then stored in a `CCObject`. Adapt the code in this method to support knowledge bases with different information.
+2. The recommender currently implements three predictors: `SimpleNounPredictor`, `Word2VecPredictor` and `HistoryPredictor`. To support new predictors, extend the `PredictorBase` class and add the new predictor to the collection in the `CoClassLinker` constructor.
+
+The remainder of the recommender is implemented following the guidelines provided here: <<Implementing a custom recommender>> 
